@@ -1,0 +1,9 @@
+name: Auto arm
+version: 1.0
+author: firecopy
+main: me.firecopy.autoarm.AutoArm
+commands:
+  autoarm:
+    description: puts the strongest weapon and armor on the player.
+    usage: /autoarm
+    alias: [arm]
