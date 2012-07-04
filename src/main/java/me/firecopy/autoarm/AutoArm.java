@@ -1,17 +1,4 @@
-/* How it will look in Game:
- * 1. A player has "armor" and "weapons" in their inventory.
- * 2. The player will type in /autoarm or /arm
- * 3. Strongest armor and weapons will be put on the player.
- * 4. Done!
- * 
- * How it will look in Code:
- * 1.Get items in player's armor slot
- * 2.Make a sort for the armor and items in inventory.
- * 3.Done;
- * 
- * Title: AutoArm: A Bukkit Plugin
- * Author: firecopy
- */
+
 package me.firecopy.autoarm;
 
 import org.bukkit.ChatColor;
