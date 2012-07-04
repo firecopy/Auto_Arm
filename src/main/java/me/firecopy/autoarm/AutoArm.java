@@ -164,20 +164,16 @@ public class AutoArm extends JavaPlugin {
 
     void switchPlayerArmor() {
         InventorySlot = player.getInventory().getContents();
-
-        if (ArmorSelector != null) {
-            ArmorSlotId = ArmorSelector.getTypeId();
-        }
-
         Check();
-
-
     }
     int i;
 
     void Check() {
         for (i = 0; i <= 35; i++) {
             InventorySlot = player.getInventory().getContents();
+            if (ArmorSelector != null) {
+                ArmorSlotId = ArmorSelector.getTypeId();
+            }
             if (ArmorSlotId != Diamond_Armor[ArmorCounter]) {
                 if (ArmorSlotId != Iron_Armor[ArmorCounter]) {
                     if (ArmorSlotId != Chain_Armor[ArmorCounter]) {
@@ -197,6 +193,7 @@ public class AutoArm extends JavaPlugin {
                     diamondCheck();
                 }                
             }
+            
             if (ArmorCounter == 0) {
                 player.getInventory().setHelmet(ArmorSelector);
             }
@@ -219,7 +216,7 @@ public class AutoArm extends JavaPlugin {
             player.getInventory().setItem(0 + i, InventorySlot[i]);
 
             //reseting vars
-            
+            InventorySlot[i] = null;
         }
 
 
@@ -238,7 +235,7 @@ public class AutoArm extends JavaPlugin {
         }
         
     }
-
+    
     private void diamondIronCheck() {
         if (InventorySlot[i] != null) {
             InventorySlotId = InventorySlot[i].getTypeId();
