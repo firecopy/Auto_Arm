@@ -36,93 +36,6 @@ public class AutoArm extends JavaPlugin {
     int[] Chain_Armor = {302, 303, 304, 305};
     int[] Gold_Armor = {314, 315, 316, 317};
     int[] Leather_Armor = {298, 299, 300, 301};
-    /*
-     * Reference:
-     * int
-     * Diamond_Helmet
-     * =
-     * 310;
-     * int
-     * Diamond_Chest
-     * =
-     * 311;
-     * int
-     * Diamond_Leggings
-     * =
-     * 312;
-     * int
-     * Diamond_Boots
-     * =
-     * 313;
-     *
-     * int
-     * Iron_Helmet
-     * =
-     * 306;
-     * int
-     * Iron_Chest
-     * =
-     * 307;
-     * int
-     * Iron_Leggings
-     * =
-     * 308;
-     * int
-     * Iron_Boots
-     * =
-     * 309;
-     *
-     * int
-     * Chain_Helmet
-     * =
-     * 303;
-     * int
-     * Chain_Chest
-     * =
-     * 304;
-     * int
-     * Chain_Leggings
-     * =
-     * 305;
-     * int
-     * Chain_Boots
-     * =
-     * 306;
-     *
-     * int
-     * Gold_Helmet
-     * =
-     * 314;
-     * int
-     * Gold_Chest
-     * =
-     * 315;
-     * int
-     * Gold_Leggings
-     * =
-     * 316;
-     * int
-     * Gold_Boots
-     * =
-     * 317;
-     *
-     * int
-     * Leather_Helmet
-     * =
-     * 298;
-     * int
-     * Leather_Chest
-     * =
-     * 299;
-     * int
-     * Leather_Leggings
-     * =
-     * 300;
-     * int
-     * Leather_Boots
-     * =
-     * 301;
-     */
     ItemStack ArmorSelector;
     ItemStack temp;
     ItemStack[] InventorySlot;
@@ -130,13 +43,23 @@ public class AutoArm extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-
-        player = ((Player) sender);
+        if (sender instanceof Player) {
+            player = ((Player) sender);
+        } else {
+            sender.sendMessage("You must be a player you noob");
+            return false;
+        }
 
         if (commandLabel.equalsIgnoreCase("autoarm") || commandLabel.equalsIgnoreCase("arm")) {
-            player.sendMessage(ChatColor.GREEN + "You have been equiped your best armor");
-            getPlayerArmor();
-            return true;
+            if (sender.hasPermission("autoarm.arm")) {
+                player.sendMessage(ChatColor.GREEN + "You have been equiped your best armor");
+                getPlayerArmor();
+                return true;
+            } else {
+                player.sendMessage(ChatColor.RED +"You don't have permission to use Auto_Arm");
+                return false;
+            }
+
         } else {
             return false;
         }
