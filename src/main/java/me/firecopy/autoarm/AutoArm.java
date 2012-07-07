@@ -39,7 +39,9 @@ public class AutoArm extends JavaPlugin {
 
         if (commandLabel.equalsIgnoreCase("autoarm") || commandLabel.equalsIgnoreCase("arm")) {
             if (sender.hasPermission("autoarm.arm")) {
-                player.sendMessage(ChatColor.GREEN + "You have been equiped your best armor");
+                if (sender.hasPermission("autoarm.message")){
+                    player.sendMessage(ChatColor.GREEN + "You have equipped your best armor and weapon");
+                }
                 getPlayerArmor();
                 return true;
             } else {
