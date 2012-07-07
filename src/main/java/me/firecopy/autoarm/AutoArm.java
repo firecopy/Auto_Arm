@@ -1,4 +1,3 @@
-
 package me.firecopy.autoarm;
 
 import org.bukkit.ChatColor;
@@ -23,6 +22,7 @@ public class AutoArm extends JavaPlugin {
     int[] Chain_Armor = {302, 303, 304, 305};
     int[] Gold_Armor = {314, 315, 316, 317};
     int[] Leather_Armor = {298, 299, 300, 301};
+    int[] Weapons = {276, 267, 272, 268, 283};
     ItemStack ArmorSelector;
     ItemStack temp;
     ItemStack[] InventorySlot;
@@ -43,7 +43,7 @@ public class AutoArm extends JavaPlugin {
                 getPlayerArmor();
                 return true;
             } else {
-                player.sendMessage(ChatColor.RED +"You don't have permission to use Auto_Arm");
+                player.sendMessage(ChatColor.RED + "You don't have permission to use Auto_Arm");
                 return false;
             }
 
@@ -73,12 +73,12 @@ public class AutoArm extends JavaPlugin {
     }
 
     void switchPlayerArmor() {
-        InventorySlot = player.getInventory().getContents();
-        Check();
+        autoArmor();
+        autoWeapon();
     }
     int i;
 
-    void Check() {
+    void autoArmor() {
         for (i = 0; i <= 35; i++) {
             InventorySlot = player.getInventory().getContents();
             if (ArmorSelector != null) {
@@ -102,6 +102,8 @@ public class AutoArm extends JavaPlugin {
                 } else {
                     diamondCheck();
                 }
+            } else {
+                break;
             }
 
             if (ArmorCounter == 0) {
@@ -123,7 +125,7 @@ public class AutoArm extends JavaPlugin {
 
             }
 
-            player.getInventory().setItem(0 + i, InventorySlot[i]);
+            player.getInventory().setItem(i, InventorySlot[i]);
 
             //reseting vars
             InventorySlot[i] = null;
@@ -131,6 +133,95 @@ public class AutoArm extends JavaPlugin {
 
 
 
+    }
+    int WeaponSlotId = 0;
+    ItemStack WeaponSlot;
+
+    void autoWeapon() {
+        for (i = 0; i <= 35; i++) {
+            InventorySlot = player.getInventory().getContents();
+            if (InventorySlot[0] != null) {
+                WeaponSlotId = InventorySlot[0].getTypeId();
+            }
+            WeaponSlot = InventorySlot[0];
+            if (InventorySlot[i] != null) {
+                InventorySlotId = InventorySlot[i].getTypeId();
+                if (WeaponSlotId == Weapons[0]) {
+                    break;
+                } else if (WeaponSlotId == Weapons[1]) {
+                    diamondWeaponCheck();
+                } else if (WeaponSlotId == Weapons[2]) {
+                    diamondIronWeaponCheck();
+                } else if (WeaponSlotId == Weapons[3]) {
+                    diamondIronStoneWeaponCheck();
+                } else if (WeaponSlotId == Weapons[4]) {
+                    diamondIronStoneWoodWeaponCheck();
+                } else {
+                    allWeaponCheck();
+                }
+            }
+
+            player.getInventory().setItem(0, WeaponSlot);
+            InventorySlot[i] = null;
+        }
+
+    }
+
+    private void diamondWeaponCheck() {
+        if (InventorySlotId == Weapons[0]) {
+            weaponSwitch();
+        }
+    }
+
+    private void diamondIronWeaponCheck() {
+        if (InventorySlotId == Weapons[0]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[1]) {
+            weaponSwitch();
+        }
+    }
+
+    private void diamondIronStoneWeaponCheck() {
+        if (InventorySlotId == Weapons[0]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[1]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[2]) {
+            weaponSwitch();
+        }
+    }
+
+    private void diamondIronStoneWoodWeaponCheck() {
+        if (InventorySlotId == Weapons[0]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[1]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[2]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[3]) {
+            weaponSwitch();
+        }
+    }
+
+    private void allWeaponCheck() {
+        if (InventorySlotId == Weapons[0]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[1]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[2]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[3]) {
+            weaponSwitch();
+        } else if (InventorySlotId == Weapons[4]) {
+            weaponSwitch();
+        }
+    }
+
+    private void weaponSwitch() {
+        temp = WeaponSlot;
+        WeaponSlot = InventorySlot[i];
+        InventorySlot[i] = temp;
+        player.getInventory().setItem(i, InventorySlot[i]);
     }
 
     private void diamondCheck() {

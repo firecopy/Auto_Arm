@@ -1,5 +1,5 @@
 name: Auto arm
-version: 0.2
+version: 0.3
 author: firecopy
 main: me.firecopy.autoarm.AutoArm
 commands:
