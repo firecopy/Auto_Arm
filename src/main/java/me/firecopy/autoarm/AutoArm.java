@@ -3,18 +3,14 @@ package me.firecopy.autoarm;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import java.util.logging.Logger;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class AutoArm extends JavaPlugin {
 
-    private static final Logger log = Logger.getLogger("Minecraft");
-
-    public void onEnabled() {
-        log.info("Autoarm has been enabled!");
-    }
     Player player;
     int ArmorCounter = 0;
     int[] Diamond_Armor = {310, 311, 312, 313};
@@ -42,7 +38,12 @@ public class AutoArm extends JavaPlugin {
                 if (sender.hasPermission("autoarm.message")){
                     player.sendMessage(ChatColor.GREEN + "You have equipped your best armor and weapon");
                 }
-                getPlayerArmor();
+                if (player.getGameMode() == GameMode.CREATIVE && sender.hasPermission("autoarm.autodiamond")){
+                    autoCreativeDiamond();
+                }
+                else {    
+                    getPlayerArmor();
+                }
                 return true;
             } else {
                 player.sendMessage(ChatColor.RED + "You don't have permission to use Auto_Arm");
@@ -335,5 +336,17 @@ public class AutoArm extends JavaPlugin {
 
             }
         }
+    }
+
+    private void autoCreativeDiamond() {
+        ItemStack Diamond_Helmet = new ItemStack(Material.DIAMOND_HELMET, 1);
+        ItemStack Diamond_Chest = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+        ItemStack Diamond_Legs = new ItemStack(Material.DIAMOND_LEGGINGS, 1);
+        ItemStack Diamond_Boots = new ItemStack(Material.DIAMOND_BOOTS, 1);
+        
+        player.getInventory().setHelmet(Diamond_Helmet);
+        player.getInventory().setChestplate(Diamond_Chest);
+        player.getInventory().setLeggings(Diamond_Legs);
+        player.getInventory().setBoots(Diamond_Boots);
     }
 }

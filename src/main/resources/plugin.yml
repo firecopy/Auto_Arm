@@ -1,5 +1,5 @@
 name: Auto arm
-version: 0.4
+version: 0.6
 author: firecopy
 main: me.firecopy.autoarm.AutoArm
 commands:
@@ -13,3 +13,6 @@ permissions:
   autoarm.message:
     description: Toggle's if players see the autoarm message.
     default: true
+  autoarm.autodiamond:
+    description: Automatic best armor
+    default: false
